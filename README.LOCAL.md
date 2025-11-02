@@ -175,7 +175,8 @@ docker compose -f compose.local.yaml up -d
 For production deployment, see:
 - [Official README](./README.md)
 - [Production compose.yaml](./compose.yaml)
-- https://github.com/bluesky-social/pds
+- **Our fork:** https://github.com/CommunityStream-io/pds
+- Upstream: https://github.com/bluesky-social/pds
 
 ---
 
