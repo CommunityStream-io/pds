@@ -24,7 +24,7 @@ services:
       
       # Development Mode
       PDS_DEV_MODE: "true"
-      PDS_SERVICE_HANDLE_DOMAINS: ".test"
+      PDS_SERVICE_HANDLE_DOMAINS: ".traiforos.com,.test"
       PDS_INVITE_REQUIRED: "false"
       PDS_DISABLE_SSRF_PROTECTION: "true"
       
