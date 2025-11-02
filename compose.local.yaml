@@ -1,0 +1,47 @@
+services:
+  pds:
+    container_name: pds-local
+    image: ghcr.io/bluesky-social/pds:0.4
+    ports:
+      - "2583:3000"  # Map container port 3000 to host port 2583
+    restart: unless-stopped
+    volumes:
+      - ./data:/pds  # Local data directory
+    environment:
+      # Server Configuration
+      PDS_HOSTNAME: localhost
+      PDS_PORT: "3000"
+      PDS_DATA_DIRECTORY: /pds/data
+      PDS_BLOBSTORE_DISK_LOCATION: /pds/blobs
+      
+      # Security (change these!)
+      PDS_JWT_SECRET: development-secret-change-in-production
+      PDS_ADMIN_PASSWORD: admin
+      
+      # Cryptographic Keys (REQUIRED)
+      PDS_PLC_ROTATION_KEY_K256_PRIVATE_KEY_HEX: "89721a5b3d0902dc1aa41ec13cfecf917b1770763d1fb4f732ee7c2011c1a102"
+      PDS_REPO_SIGNING_KEY_K256_PRIVATE_KEY_HEX: "4653560860586ac7a8fd1a8a13217abc1e0799d0505a4df6a3ba26350bc722b8"
+      
+      # Development Mode
+      PDS_DEV_MODE: "true"
+      PDS_SERVICE_HANDLE_DOMAINS: ".test"
+      PDS_INVITE_REQUIRED: "false"
+      PDS_DISABLE_SSRF_PROTECTION: "true"
+      
+      # AT Protocol Services
+      PDS_DID_PLC_URL: https://plc.directory
+      PDS_BSKY_APP_VIEW_URL: https://api.bsky.app
+      PDS_BSKY_APP_VIEW_DID: did:web:api.bsky.app
+      PDS_CRAWLERS: https://bsky.network
+      
+      # Logging
+      LOG_ENABLED: "true"
+      LOG_LEVEL: info
+      
+      # OAuth Provider
+      PDS_OAUTH_PROVIDER_NAME: "Local Development PDS"
+      PDS_OAUTH_PROVIDER_PRIMARY_COLOR: "#7507e3"
+
+# Note: We removed Caddy (TLS) and Watchtower (auto-updates) for local development
+# The PDS is accessible directly at http://localhost:2583
+
